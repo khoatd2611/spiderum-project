@@ -2,13 +2,15 @@ module Api
   module V1
     module User1
       class PostsController < ApplicationController
-        before_action set_post, only: %i[index edit update destroy]
+        before_action set_post, only: %i[show edit update destroy]
         
         def index
+          @posts = Post.all
         end
 
         def show
-          @posts = Post.all
+          @post.update(views: @post.view + 1)
+          render json: {post: @post}, status: :ok
         end
 
         def new

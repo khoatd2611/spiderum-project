@@ -52,6 +52,7 @@ module Api
         end
 
       private
+      # set user with params id
         def set_user
           @user = User.find(params[:id])
         end

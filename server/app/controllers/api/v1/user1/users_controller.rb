@@ -41,16 +41,6 @@ module Api
         def destroy
         end
 
-        def login
-          @user = User.find_by(email: params[:email])
-          if @user && @user.valid_password?(params[:password])
-            token = JsonWebToken.encode({user_id: @user.id})
-            render json: {user: @user, token: token}, status: :ok
-          else
-            render json: {message: "Error"}, status: 400
-          end
-        end
-
       private
       # set user with params id
         def set_user

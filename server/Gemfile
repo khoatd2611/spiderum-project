@@ -68,3 +68,5 @@ gem "noticed", "~> 1.5"
 gem 'devise'
 
 # gem 'trollop', '~> 2.9', '>= 2.9.10'
+
+gem 'will_paginate'

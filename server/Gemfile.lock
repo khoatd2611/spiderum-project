@@ -247,7 +247,6 @@ DEPENDENCIES
   rails (~> 7.0.4)
   ransack
   redis (~> 4.0)
-  trollop (~> 2.9, >= 2.9.10)
   tzinfo-data
   will_paginate
 

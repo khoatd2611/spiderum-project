@@ -1,7 +1,14 @@
 module SessionsHelper
-
+  
   def current_user
-    @current_user ||= User.find_by(id: params[:id])
+    if (user_id = cookies.encrypted[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(cookies[:remember_token])
+        @current_user = user
+      end
+    else
+      @current_user ||= User.find_by(id: params[:id])
+    end
   end
 
   def logged_in?
@@ -10,5 +17,12 @@ module SessionsHelper
 
   def log_out
     current_user = nil
+  end
+
+  # create cookies - for remember me check box
+  def remember(user)
+    user.remember
+    cookies.permanent.encrypted[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
   end
 end

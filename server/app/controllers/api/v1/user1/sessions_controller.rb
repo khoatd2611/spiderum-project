@@ -14,6 +14,8 @@ module Api
         end
 
         def destroy
+          log_out
+          render json: {message: "Logged out"}, status: :ok
         end
 
       end

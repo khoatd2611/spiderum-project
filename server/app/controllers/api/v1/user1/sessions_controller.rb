@@ -9,6 +9,7 @@ module Api
             # remember user 
             # params[:remember_me] == '1' ? remember(user) : forget(user) instead of line 10
             # uncomment with view-check box, if checked >> 1 >> remmeber, else 0 >> forget
+            # 10.2.3/586 forwarding url >> how to add it to API?
             token = JsonWebToken.encode({user_id: @user.id})
             render json: {user: @user, token: token}, status: :ok
           else

@@ -23,8 +23,10 @@ module Api
         def create 
           @user = User.new(user_params)
           if @user.save
+            UserMailer.account_activation(@user).deliver_now
             token = JsonWebToken.encode({user_id: @user.id})
-            render json: {user: @user, token: token}, status: :ok
+            render json: {message: "Please check your email to active account", 
+                          user: @user, token: token}, status: :ok
           else
             render json: {error: "Sign up false"}, status: :unprocessable_entity
           end

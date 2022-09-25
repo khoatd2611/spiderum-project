@@ -4,12 +4,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :user1 do
         resources :users
-        get '/edit' , to: 'users#edit'
-        get '/signup' , to: 'users#new'
-        post '/signup' , to: 'users#create'
-        post '/login' , to: 'users#login'
+        get '/edit', to: 'users#edit'
+        get '/signup', to: 'users#new'
+        post '/signup', to: 'users#create'
+        post '/login', to: 'users#login'
 
-        resources :post
+        resources :posts
       end
     end
   end

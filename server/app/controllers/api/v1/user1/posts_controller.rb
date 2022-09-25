@@ -2,13 +2,14 @@ module Api
   module V1
     module User1
       class PostsController < ApplicationController
-        before_action set_post, only: %i[show edit update destroy]
+        before_action :set_post, only: %i[show edit update destroy]
         
         def index
           @posts = Post.all
         end
 
         def show
+          # +1 view when the post is loaded
           @post.update(views: @post.view + 1)
           render json: {post: @post}, status: :ok
         end
@@ -42,6 +43,7 @@ module Api
             render json: {message: "Post deleted"}, status: :ok
           else
             render json: {error: "Delete false"}, status: :unprocessable_entity
+          end
         end
 
       private

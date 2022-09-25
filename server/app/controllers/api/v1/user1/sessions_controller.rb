@@ -12,7 +12,7 @@ module Api
             token = JsonWebToken.encode({user_id: @user.id})
             render json: {user: @user, token: token}, status: :ok
           else
-            render json: {message: "Error"}, status: 400
+            render json: {message: "Error"}, status: :unprocessable_entity
           end
         end
 

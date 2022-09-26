@@ -5,9 +5,9 @@ module Api
         def edit
           user = User.find_by(email: params[:email])
           if user && !user.activated? && user.authenticated?(:activation, params[:id])
-            user.update_attribute(:activated, true)
-            user.update_attribute(:activated_at, Time.zone.now)
-            render json: {message: "Account activated!", user: user}, status: :ok
+            user.activate
+            token = JsonWebToken.encode({user_id: @user.id})
+            render json: {message: "Account activated!", user: user, token: token}, status: :ok
           else
             render json: {message: "Invalid activation link"}, status: :unprocessable_entity
           end
